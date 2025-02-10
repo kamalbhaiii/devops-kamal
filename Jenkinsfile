@@ -27,6 +27,8 @@ pipeline{
         }
         stage("Run docker image in Container"){
             steps{
+                sh "docker stop $CONTAINER_NAME || true"
+                sh "docker remove $CONTAINER_NAME || true"
                 sh "docker run -d -p 5173:80 --name $CONTAINER_NAME $IMAGE_NAME"
             }
         }
